@@ -154,11 +154,6 @@
     };
 };
 
-&ov5640_mipi1 {
-	// DISABLED to avoid conflict because pinctrl_ecspi2_j17 reports ECSPI2_MISO which is in use by pinctrl_csi1
-	status = "disabled";
-};
-
 &mipi_csi_1 {
 	// DISABLED to avoid conflict because pinctrl_ecspi2_j17 reports ECSPI2_MISO which is in use by pinctrl_csi1
 	status = "disabled";
