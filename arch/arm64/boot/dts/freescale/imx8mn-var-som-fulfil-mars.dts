@@ -21,10 +21,9 @@
 
 &iomuxc {
 	pinctrl-0 = <&pinctrl_hog>;
-
 	pinctrl_hog: hoggrp {
 		fsl,pins = <
-			MX8MN_IOMUXC_GPIO1_IO02_GPIO1_IO2		0x116
+			// MX8MN_IOMUXC_GPIO1_IO02_GPIO1_IO2		0x116
 			MX8MN_IOMUXC_GPIO1_IO06_GPIO1_IO6		0x116
 			MX8MN_IOMUXC_GPIO1_IO12_GPIO1_IO12		0x116
 			MX8MN_IOMUXC_SAI5_RXFS_GPIO3_IO19		0x116
@@ -33,7 +32,7 @@
 			MX8MN_IOMUXC_SAI5_RXD3_GPIO3_IO24		0x116
 			MX8MN_IOMUXC_SAI5_MCLK_GPIO3_IO25		0x116
 			MX8MN_IOMUXC_SAI2_RXFS_GPIO4_IO21		0x116
-			MX8MN_IOMUXC_SAI2_RXC_GPIO4_IO22		0x116
+			// MX8MN_IOMUXC_SAI2_RXC_GPIO4_IO22		0x116
 			MX8MN_IOMUXC_SAI2_RXD0_GPIO4_IO23		0x116
 			MX8MN_IOMUXC_SAI2_TXFS_GPIO4_IO24		0x116
 			MX8MN_IOMUXC_SAI2_TXC_GPIO4_IO25		0x116
@@ -143,6 +142,7 @@
 
 /* UART for RS232 communication to auxiliary induction shuttle
 Normally used by SOM Blutetooth which must first be disabled */
+
 &uart2 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart2>, <&pinctrl_bt>;
