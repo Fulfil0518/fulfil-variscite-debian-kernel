@@ -17,6 +17,43 @@
 		off-on-delay = <20000>;
 		enable-active-high;
 	};
+
+	{
+		imx8mn-cm7 {
+			compatible = "fsl,imx8mn-cm7";
+			rsc-da = <0x40000000>;
+			mbox-names = "tx", "rx", "rxdb";
+			mboxes = <&mu 0 1
+				&mu 1 1
+				&mu 3 1>;
+			memory-region = <&vdev0vring0>, <&vdev0vring1>, <&vdevbuffer>, <&m_core_reserved>;
+			status = "okay";
+		};
+
+		reserved-memory {
+			m_core_reserved: m_core@0x7e000000 {
+				no-map;
+				reg = <0 0x7e000000 0 0x1000000>;
+			};
+
+			vdev0vring0: vdev0vring0@40000000 {
+				compatible = "shared-dma-pool";
+				reg = <0 0x40000000 0 0x8000>;
+				no-map;
+			};
+
+			vdev0vring1: vdev0vring1@40008000 {
+				compatible = "shared-dma-pool";
+				reg = <0 0x40008000 0 0x8000>;
+				no-map;
+			};
+			vdevbuffer: vdevbuffer@0x40400000 {
+				compatible = "shared-dma-pool";
+				reg = <0 0x40400000 0 0x100000>;
+				no-map;
+			};
+		};
+	};
 };
 
 &iomuxc {
@@ -171,12 +208,17 @@
 
 &i2c3 {
 	status = "okay";
+	clock-frequency = <400000>;
 
 	/* DS1337 RTC module */
 	rtc@68 {
 		status = "disabled";
 		compatible = "dallas,ds1337";
 		reg = <0x68>;
+	};
+
+	wm8904: audio-codec@1a {
+		status = "disabled";
 	};
 };
 
