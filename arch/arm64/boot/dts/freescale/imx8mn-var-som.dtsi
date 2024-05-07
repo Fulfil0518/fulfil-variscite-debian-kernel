@@ -694,7 +694,7 @@
 /* Bluetooth */
 &uart2 {
 	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_uart2>, <&pinctrl_bt>;
+	pinctrl-0 = <&pinctrl_uart2>;
 	assigned-clocks = <&clk IMX8MN_CLK_UART2>;
 	assigned-clock-parents = <&clk IMX8MN_SYS_PLL1_80M>;
 	uart-has-rtscts;

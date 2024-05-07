@@ -23,6 +23,7 @@
 	pinctrl-0 = <&pinctrl_hog>;
 	pinctrl_hog: hoggrp {
 		fsl,pins = <
+			MX8MN_IOMUXC_SPDIF_RX_GPIO5_IO4  		0x116
 		>;
 	};
 	pinctrl_uart1: uart1grp {
