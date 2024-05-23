@@ -81,20 +81,24 @@
 			MX8MN_IOMUXC_SAI2_TXD0_GPIO4_IO26		0x114
 			MX8MN_IOMUXC_SAI3_RXC_GPIO4_IO29		0x114
 			MX8MN_IOMUXC_SAI3_RXD_GPIO4_IO30		0x114
-			MX8MN_IOMUXC_SAI3_TXFS_GPIO4_IO31		0x114
 			MX8MN_IOMUXC_SPDIF_EXT_CLK_GPIO5_IO5	0x114
 			MX8MN_IOMUXC_I2C2_SCL_GPIO5_IO16		0x114
 			MX8MN_IOMUXC_I2C2_SDA_GPIO5_IO17		0x114
 			MX8MN_IOMUXC_I2C4_SCL_GPIO5_IO20		0x114
 			MX8MN_IOMUXC_I2C4_SDA_GPIO5_IO21		0x114
-			MX8MN_IOMUXC_UART3_RXD_GPIO5_IO26		0x114
-			MX8MN_IOMUXC_UART3_TXD_GPIO5_IO27		0x114
 		>;
 	};
 	pinctrl_uart1: uart1grp {
 		fsl,pins = <
 			MX8MN_IOMUXC_UART1_RXD_UART1_DCE_RX		0x140
 			MX8MN_IOMUXC_UART1_TXD_UART1_DCE_TX		0x140
+		>;
+	};
+
+	pinctrl_uart2: uart2grp {
+		fsl,pins = <
+			MX8MN_IOMUXC_SAI3_TXFS_UART2_DCE_RX		0x140
+			MX8MN_IOMUXC_SAI3_TXC_UART2_DCE_TX		0x140
 		>;
 	};
 
@@ -249,8 +253,23 @@
 	status = "okay";
 };
 
-/* Bluetooth */
+/* Header */
+&uart1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart1>;
+	status = "okay";
+};
+
 &uart2 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart2>;
+	status = "okay";
+};
+
+/* Header */
+&uart3 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart3>;
 	status = "okay";
 };
 
