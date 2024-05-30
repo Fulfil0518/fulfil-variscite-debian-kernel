@@ -112,7 +112,7 @@
 		ti,settle-delay-usec = /bits/ 16 <150>;
 		ti,keep-vref-on;
 		wakeup-source;
-		status = "disabled";
+		status = "okay";
 	};
 
 	/* CAN controller */
@@ -156,7 +156,7 @@
 	phy-reset-duration = <10>;
 	phy-reset-post-delay = <20>;
 	phy-reset-on-resume;
-	status = "disabled";
+	status = "okay";
 
 	mdio {
 		#address-cells = <1>;
@@ -671,7 +671,7 @@
 	assigned-clocks = <&clk IMX8MN_CLK_SAI5>;
 	assigned-clock-parents = <&clk IMX8MN_AUDIO_PLL1_OUT>;
 	assigned-clock-rates = <1536000>;
-	status = "disabled";
+	status = "okay";
 };
 
 &spdif1 {
@@ -694,7 +694,7 @@
 /* Bluetooth */
 &uart2 {
 	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_uart2>;
+	pinctrl-0 = <&pinctrl_uart2>, <&pinctrl_bt>;
 	assigned-clocks = <&clk IMX8MN_CLK_UART2>;
 	assigned-clock-parents = <&clk IMX8MN_SYS_PLL1_80M>;
 	uart-has-rtscts;
