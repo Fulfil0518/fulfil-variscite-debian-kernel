@@ -59,9 +59,12 @@
 	
 	pinctrl_hog: hoggrp {
 		fsl,pins = <
+			MX8MN_IOMUXC_GPIO1_IO01_GPIO1_IO1		0x114
 			MX8MN_IOMUXC_GPIO1_IO03_GPIO1_IO3 		0x114
+			MX8MN_IOMUXC_GPIO1_IO07_GPIO1_IO7		0x114
 			MX8MN_IOMUXC_GPIO1_IO08_GPIO1_IO8		0x114
 			MX8MN_IOMUXC_GPIO1_IO11_GPIO1_IO11		0x114
+			MX8MN_IOMUXC_GPIO1_IO12_GPIO1_IO12		0x114
 			MX8MN_IOMUXC_GPIO1_IO13_GPIO1_IO13		0x114
 			MX8MN_IOMUXC_ENET_MDC_GPIO1_IO16		0x114
 			MX8MN_IOMUXC_ENET_MDIO_GPIO1_IO17		0x114
@@ -78,11 +81,13 @@
 			MX8MN_IOMUXC_SAI2_TXFS_GPIO4_IO24 		0x114
 			MX8MN_IOMUXC_SAI2_TXC_GPIO4_IO25		0x114
 			MX8MN_IOMUXC_SAI2_TXD0_GPIO4_IO26		0x114
+			MX8MN_IOMUXC_SAI2_MCLK_GPIO4_IO27		0x114
 			MX8MN_IOMUXC_SAI3_RXC_GPIO4_IO29		0x114
 			MX8MN_IOMUXC_SAI3_RXD_GPIO4_IO30		0x114
 			MX8MN_IOMUXC_SPDIF_EXT_CLK_GPIO5_IO5	0x114
 			MX8MN_IOMUXC_I2C4_SCL_GPIO5_IO20		0x114
 			MX8MN_IOMUXC_I2C4_SDA_GPIO5_IO21		0x114
+			MX8MN_IOMUXC_UART2_RXD_GPIO5_IO24		0x114
 		>;
 	};
 	pinctrl_uart1: uart1grp {
@@ -213,15 +218,17 @@
 			MX8MN_IOMUXC_ECSPI1_SCLK_ECSPI1_SCLK		0x13
 			MX8MN_IOMUXC_ECSPI1_MOSI_ECSPI1_MOSI		0x13
 			MX8MN_IOMUXC_ECSPI1_MISO_ECSPI1_MISO		0x13
+			MX8MN_IOMUXC_GPIO1_IO00_GPIO1_IO0		0x13
 			MX8MN_IOMUXC_SD2_RESET_B_GPIO2_IO19		0x13
 		>;
 };
 
 &ecspi1 {
 	status = "okay";
-	fsl,spi-num-chipselects = <0>;
+	fsl,spi-num-chipselects = <2>;
 	cs-gpios = <&gpio5 9 GPIO_ACTIVE_LOW>,
-		   <&gpio1  0 GPIO_ACTIVE_LOW>;
+		   <&gpio1  0 GPIO_ACTIVE_LOW>,
+		   <&gpio5  5 GPIO_ACTIVE_LOW>;
 	/delete-node/ ads7846@0;
     /*/delete-property/ dmas;
     /delete-property/ dma-names;*/
@@ -241,10 +248,8 @@
 &ecspi2 {
     pinctrl-names = "default";
     pinctrl-0 = <&pinctrl_ecspi2_j17>;
-	fsl,spi-num-chipselects = <3>;
-	cs-gpios = <&gpio3 21 GPIO_ACTIVE_LOW>,
-		   <&gpio3  22 GPIO_ACTIVE_LOW>,
-		   <&gpio3 23 GPIO_ACTIVE_LOW>;
+	fsl,spi-num-chipselects = <1>;
+	cs-gpios = <&gpio3 21 GPIO_ACTIVE_LOW>;
     status = "okay";
     /* Test SPI device */
     spidev@0 {
@@ -360,5 +365,5 @@
 };
 
 &wdog1 {
-	status = "disabled";
+	status = "okay";
 };
