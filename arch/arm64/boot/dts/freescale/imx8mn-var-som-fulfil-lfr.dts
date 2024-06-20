@@ -84,7 +84,9 @@
 			MX8MN_IOMUXC_SAI2_MCLK_GPIO4_IO27		0x114
 			MX8MN_IOMUXC_SAI3_RXC_GPIO4_IO29		0x114
 			MX8MN_IOMUXC_SAI3_RXD_GPIO4_IO30		0x114
+			MX8MN_IOMUXC_SPDIF_RX_GPIO5_IO4			0x114
 			MX8MN_IOMUXC_SPDIF_EXT_CLK_GPIO5_IO5	0x114
+			MX8MN_IOMUXC_ECSPI2_SS0_GPIO5_IO13		0x114
 			MX8MN_IOMUXC_I2C4_SCL_GPIO5_IO20		0x114
 			MX8MN_IOMUXC_I2C4_SDA_GPIO5_IO21		0x114
 			MX8MN_IOMUXC_UART2_RXD_GPIO5_IO24		0x114
@@ -183,7 +185,6 @@
             MX8MN_IOMUXC_ECSPI2_SCLK_ECSPI2_SCLK    0x13    /* J17.6 */
             MX8MN_IOMUXC_ECSPI2_MOSI_ECSPI2_MOSI    0x13    /* J17.4 */
             MX8MN_IOMUXC_ECSPI2_MISO_ECSPI2_MISO    0x13    /* J17.8 */
-            MX8MN_IOMUXC_ECSPI2_SS0_ECSPI2_SS0      0x13    /* J17.10 */
         >;
     };
 
@@ -228,7 +229,7 @@
 	fsl,spi-num-chipselects = <2>;
 	cs-gpios = <&gpio5 9 GPIO_ACTIVE_LOW>,
 		   <&gpio1  0 GPIO_ACTIVE_LOW>,
-		   <&gpio5  5 GPIO_ACTIVE_LOW>;
+		   <&gpio1  23 GPIO_ACTIVE_LOW>;
 	/delete-node/ ads7846@0;
     /*/delete-property/ dmas;
     /delete-property/ dma-names;*/
