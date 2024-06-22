@@ -82,8 +82,6 @@
 			MX8MN_IOMUXC_SAI2_TXC_GPIO4_IO25		0x114
 			MX8MN_IOMUXC_SAI2_TXD0_GPIO4_IO26		0x114
 			MX8MN_IOMUXC_SAI2_MCLK_GPIO4_IO27		0x114
-			MX8MN_IOMUXC_SAI3_RXC_GPIO4_IO29		0x114
-			MX8MN_IOMUXC_SAI3_RXD_GPIO4_IO30		0x114
 			MX8MN_IOMUXC_SPDIF_RX_GPIO5_IO4			0x114
 			MX8MN_IOMUXC_SPDIF_EXT_CLK_GPIO5_IO5	0x114
 			MX8MN_IOMUXC_ECSPI2_SS0_GPIO5_IO13		0x114
@@ -104,6 +102,8 @@
 		fsl,pins = <
 			MX8MN_IOMUXC_SAI3_TXFS_UART2_DCE_RX		0x140
 			MX8MN_IOMUXC_SAI3_TXC_UART2_DCE_TX		0x140
+			MX8MN_IOMUXC_SAI3_RXC_UART2_DCE_CTS_B	0x140
+			MX8MN_IOMUXC_SAI3_RXD_UART2_DCE_RTS_B	0x140
 		>;
 	};
 
@@ -237,7 +237,7 @@
 };
 
 &usbotg1 {
-	dr_mode = "host";
+	dr_mode = "otg";
 	picophy,pre-emp-curr-control = <3>;
 	picophy,dc-vol-level-adjust = <7>;
 	hnp-disable;
@@ -333,8 +333,6 @@
 };
 
 &uart2 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_uart2>;
 	status = "okay";
 };
 

@@ -125,13 +125,7 @@
 
 /* UART for RS232 communication to auxiliary induction shuttle
 Normally used by SOM Blutetooth which must first be disabled */
-
 &uart2 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_uart2>;
-	assigned-clocks = <&clk IMX8MN_CLK_UART2>;
-	assigned-clock-parents = <&clk IMX8MN_SYS_PLL1_80M>;
-	uart-has-rtscts;
 	status = "okay";
 };
 
@@ -141,6 +135,7 @@ Normally used by SOM Blutetooth which must first be disabled */
 	pinctrl-0 = <&pinctrl_uart3>;
 	status = "okay";
 };
+
 /* Console */
 &uart4 {
 	pinctrl-names = "default";
