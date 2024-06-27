@@ -232,6 +232,7 @@
 		   <&gpio1  0 GPIO_ACTIVE_LOW>,
 		   <&gpio1  23 GPIO_ACTIVE_LOW>;
 	/delete-node/ ads7846@0;
+	/delete-node/ spidev@2;
     /*/delete-property/ dmas;
     /delete-property/ dma-names;*/
 };
