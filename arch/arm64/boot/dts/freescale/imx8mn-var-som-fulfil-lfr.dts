@@ -1,5 +1,6 @@
 /dts-v1/;
 
+#include <dt-bindings/usb/pd.h>
 #include "imx8mn-var-som.dtsi"
 
 / {
@@ -49,7 +50,6 @@
 		fsl,pins = <
 			MX8MN_IOMUXC_GPIO1_IO01_GPIO1_IO1		0x114
 			MX8MN_IOMUXC_GPIO1_IO03_GPIO1_IO3 		0x114
-			MX8MN_IOMUXC_GPIO1_IO05_GPIO1_IO5		0x114
 			MX8MN_IOMUXC_GPIO1_IO06_GPIO1_IO6		0x114
 			MX8MN_IOMUXC_GPIO1_IO07_GPIO1_IO7		0x114
 			MX8MN_IOMUXC_GPIO1_IO08_GPIO1_IO8		0x114
@@ -79,6 +79,7 @@
 			MX8MN_IOMUXC_ECSPI2_SS0_GPIO5_IO13		0x114
 			MX8MN_IOMUXC_I2C4_SCL_GPIO5_IO20		0x114
 			MX8MN_IOMUXC_I2C4_SDA_GPIO5_IO21		0x114
+			MX8MN_IOMUXC_UART2_TXD_GPIO5_IO25		0x114
 		>;
 	};
 	pinctrl_uart1: uart1grp {
@@ -125,7 +126,6 @@
 			MX8MN_IOMUXC_UART1_TXD_ECSPI3_MOSI		0x13
 			MX8MN_IOMUXC_UART1_RXD_ECSPI3_SCLK		0x13
 			MX8MN_IOMUXC_UART2_RXD_ECSPI3_MISO		0x13
-			MX8MN_IOMUXC_UART2_TXD_ECSPI3_SS0		0x13
         >;
     };
 
@@ -178,7 +178,7 @@
     pinctrl-names = "default";
     pinctrl-0 = <&pinctrl_ecspi2_j17>;
 	fsl,spi-num-chipselects = <1>;
-	cs-gpios = <&gpio3 21 GPIO_ACTIVE_LOW>;
+	cs-gpios = <&gpio2 19 GPIO_ACTIVE_LOW>;
     status = "okay";
     /* Test SPI device */
     spidev@0 {
@@ -286,18 +286,6 @@
 	status = "okay";
 	/delete-property/ dmas;
 	/delete-property/ dma-names;
-};
-
-/* SD */
-&usdhc2 {
-	pinctrl-names = "default", "state_100mhz", "state_200mhz";
-	pinctrl-0 = <&pinctrl_usdhc2>, <&pinctrl_usdhc2_gpio>;
-	pinctrl-1 = <&pinctrl_usdhc2_100mhz>, <&pinctrl_usdhc2_gpio>;
-	pinctrl-2 = <&pinctrl_usdhc2_200mhz>, <&pinctrl_usdhc2_gpio>;
-	cd-gpios = <&gpio1 10 GPIO_ACTIVE_LOW>;
-	bus-width = <4>;
-	vmmc-supply = <&reg_usdhc2_vmmc>;
-	status = "okay";
 };
 
 &wdog1 {
