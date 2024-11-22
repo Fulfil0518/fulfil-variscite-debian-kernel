@@ -38,10 +38,10 @@ static int rpmsg_tty_cb(struct rpmsg_device *rpdev, void *data, int len,
 	if (len == 0)
 		return 0;
 
-	dev_dbg(&rpdev->dev, "msg(<- src 0x%x) len %d\n", src, len);
+	// dev_dbg(&rpdev->dev, "msg(<- src 0x%x) len %d\n", src, len);
 
-	print_hex_dump(KERN_DEBUG, __func__, DUMP_PREFIX_NONE, 16, 1,
-			data, len,  true);
+	// print_hex_dump(KERN_DEBUG, __func__, DUMP_PREFIX_NONE, 16, 1,
+	// 		data, len,  true);
 
 	spin_lock_bh(&cport->rx_lock);
 	space = tty_prepare_flip_string(&cport->port, &cbuf, len);
