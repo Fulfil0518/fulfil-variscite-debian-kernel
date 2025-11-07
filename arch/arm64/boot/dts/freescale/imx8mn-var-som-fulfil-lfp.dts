@@ -170,6 +170,10 @@
 	status = "disabled";
 };
 
+&bluetooth_iw61x {
+	status = "disabled";
+};
+
 &ecspi1 {
 	status = "okay";
     pinctrl-names = "default";
