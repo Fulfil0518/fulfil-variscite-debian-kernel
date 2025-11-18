@@ -5,6 +5,19 @@
 / {
 	model = "Variscite VAR-SOM-MX8M-NANO on fulfil Gantry board";
 	compatible = "variscite,var-som-mx8mn", "fsl,imx8mn";
+
+	reserved-memory {
+		ramoops_region: ramoops@42200000 {
+            compatible = "ramoops";
+            reg = <0x0 0x42200000 0x0 0x00100000>;  // 1 MiB
+            no-map;
+
+            console-size = <0x00080000>;  // 512KiB
+            record-size  = <0x00020000>;  // 128KiB
+            pmsg-size    = <0x00020000>;  // 128KiB
+            ftrace-size  = <0x00020000>;  // 128KiB
+        };
+	};
 };
 
 &iomuxc {
