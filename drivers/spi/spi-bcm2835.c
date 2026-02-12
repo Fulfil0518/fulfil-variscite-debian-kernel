@@ -367,6 +367,10 @@ static irqreturn_t bcm2835_spi_interrupt(int irq, void *dev_id)
 	struct bcm2835_spi *bs = spi_controller_get_devdata(ctlr);
 	u32 cs = bcm2835_rd(bs, BCM2835_SPI_CS);
 
+	/* Bail out early if interrupts are not enabled */
+	if (!(cs & BCM2835_SPI_CS_INTR))
+		return IRQ_NONE;
+
 	/*
 	 * An interrupt is signaled either if DONE is set (TX FIFO empty)
 	 * or if RXR is set (RX FIFO >= ¾ full).
@@ -1312,7 +1316,7 @@ static int bcm2835_spi_probe(struct platform_device *pdev)
 	bcm2835_wr(bs, BCM2835_SPI_CS,
 		   BCM2835_SPI_CS_CLEAR_RX | BCM2835_SPI_CS_CLEAR_TX);
 
-	err = devm_request_irq(&pdev->dev, bs->irq, bcm2835_spi_interrupt, 0,
+	err = devm_request_irq(&pdev->dev, bs->irq, bcm2835_spi_interrupt, IRQF_SHARED,
 			       dev_name(&pdev->dev), ctlr);
 	if (err) {
 		dev_err(&pdev->dev, "could not request IRQ: %d\n", err);
