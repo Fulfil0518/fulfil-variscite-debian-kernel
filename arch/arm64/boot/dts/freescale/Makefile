@@ -116,11 +116,18 @@ imx8mm-var-dart-1.x-dt8mcustomboard-m4-dtbs := imx8mm-var-dart-dt8mcustomboard-m
 imx8mm-var-dart-wbe-dt8mcustomboard-dtbs := imx8mm-var-dart-dt8mcustomboard.dtb imx8mm-var-dart-wbe.dtbo
 imx8mm-var-dart-wbe-dt8mcustomboard-m4-dtbs := imx8mm-var-dart-dt8mcustomboard-m4.dtb imx8mm-var-dart-wbe.dtbo
 
+imx8mm-var-som-symphony-1.x-dtbs := imx8mm-var-som-symphony.dtb imx8mm-var-som-symphony-1.x.dtbo
+imx8mm-var-som-symphony-1.x-m4-dtbs := imx8mm-var-som-symphony-m4.dtb imx8mm-var-som-symphony-1.x.dtbo
+
 imx8mm-var-som-1.x-symphony-dtbs := imx8mm-var-som-symphony.dtb imx8mm-var-som-1.x.dtbo
 imx8mm-var-som-1.x-symphony-m4-dtbs := imx8mm-var-som-symphony-m4.dtb imx8mm-var-som-1.x.dtbo
+imx8mm-var-som-1.x-symphony-1.x-dtbs := imx8mm-var-som-1.x-symphony.dtb imx8mm-var-som-symphony-1.x.dtbo
+imx8mm-var-som-1.x-symphony-1.x-m4-dtbs := imx8mm-var-som-1.x-symphony-m4.dtb imx8mm-var-som-symphony-1.x.dtbo
 
 imx8mm-var-som-wbe-symphony-dtbs := imx8mm-var-som-symphony.dtb imx8mm-var-som-wbe.dtbo
 imx8mm-var-som-wbe-symphony-m4-dtbs := imx8mm-var-som-symphony-m4.dtb imx8mm-var-som-wbe.dtbo
+imx8mm-var-som-wbe-symphony-1.x-dtbs := imx8mm-var-som-wbe-symphony.dtb imx8mm-var-som-symphony-1.x.dtbo
+imx8mm-var-som-wbe-symphony-1.x-m4-dtbs := imx8mm-var-som-wbe-symphony-m4.dtb imx8mm-var-som-symphony-1.x.dtbo
 
 imx8mm-var-dart-1.x-sonata-dtbs := imx8mm-var-dart-sonata.dtb imx8mm-var-dart-1.x.dtbo
 imx8mm-var-dart-1.x-sonata-m4-dtbs := imx8mm-var-dart-sonata-m4.dtb imx8mm-var-dart-1.x.dtbo
@@ -134,11 +141,18 @@ dtb-$(CONFIG_ARCH_MXC) += imx8mm-var-dart-1.x-dt8mcustomboard-m4.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mm-var-dart-wbe-dt8mcustomboard.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mm-var-dart-wbe-dt8mcustomboard-m4.dtb
 
+dtb-$(CONFIG_ARCH_MXC) += imx8mm-var-som-symphony-1.x.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mm-var-som-symphony-1.x-m4.dtb
+
 dtb-$(CONFIG_ARCH_MXC) += imx8mm-var-som-1.x-symphony.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mm-var-som-1.x-symphony-m4.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mm-var-som-1.x-symphony-1.x.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mm-var-som-1.x-symphony-1.x-m4.dtb
 
 dtb-$(CONFIG_ARCH_MXC) += imx8mm-var-som-wbe-symphony.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mm-var-som-wbe-symphony-m4.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mm-var-som-wbe-symphony-1.x.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mm-var-som-wbe-symphony-1.x-m4.dtb
 
 dtb-$(CONFIG_ARCH_MXC) += imx8mm-var-dart-1.x-sonata.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mm-var-dart-1.x-sonata-m4.dtb
@@ -167,20 +181,39 @@ dtb-$(CONFIG_ARCH_MXC) += imx8mn-evk-iqaudio-dacplus.dtb imx8mn-evk-iqaudio-dacp
 dtb-$(CONFIG_ARCH_MXC) += imx8mn-var-som-symphony.dtb imx8mn-var-som-symphony-m7.dtb \
 			  imx8mn-var-som-symphony-root.dtb imx8mn-var-som-inmate.dtb
 
-imx8mn-var-som-1.x-symphony-dtbs := imx8mn-var-som-symphony.dtb  imx8mn-var-som-1.x.dtbo
-imx8mn-var-som-1.x-symphony-m7-dtbs := imx8mn-var-som-symphony-m7.dtb  imx8mn-var-som-1.x.dtbo
-imx8mn-var-som-1.x-symphony-root-dtbs := imx8mn-var-som-symphony-root.dtb  imx8mn-var-som-1.x.dtbo
+imx8mn-var-som-symphony-1.x-dtbs := imx8mn-var-som-symphony.dtb imx8mn-var-som-symphony-1.x.dtbo
+imx8mn-var-som-symphony-1.x-m7-dtbs := imx8mn-var-som-symphony-m7.dtb imx8mn-var-som-symphony-1.x.dtbo
+imx8mn-var-som-symphony-1.x-root-dtbs := imx8mn-var-som-symphony-root.dtb imx8mn-var-som-symphony-1.x.dtbo
 
-imx8mn-var-som-wbe-symphony-dtbs := imx8mn-var-som-symphony.dtb  imx8mn-var-som-wbe.dtbo
-imx8mn-var-som-wbe-symphony-m7-dtbs := imx8mn-var-som-symphony-m7.dtb  imx8mn-var-som-wbe.dtbo
-imx8mn-var-som-wbe-symphony-root-dtbs := imx8mn-var-som-symphony-root.dtb  imx8mn-var-som-wbe.dtbo
+imx8mn-var-som-1.x-symphony-dtbs := imx8mn-var-som-symphony.dtb imx8mn-var-som-1.x.dtbo
+imx8mn-var-som-1.x-symphony-m7-dtbs := imx8mn-var-som-symphony-m7.dtb imx8mn-var-som-1.x.dtbo
+imx8mn-var-som-1.x-symphony-root-dtbs := imx8mn-var-som-symphony-root.dtb imx8mn-var-som-1.x.dtbo
+imx8mn-var-som-1.x-symphony-1.x-dtbs := imx8mn-var-som-symphony.dtb imx8mn-var-som-symphony-1.x.dtbo imx8mn-var-som-1.x.dtbo
+imx8mn-var-som-1.x-symphony-1.x-m7-dtbs := imx8mn-var-som-symphony-m7.dtb imx8mn-var-som-symphony-1.x.dtbo imx8mn-var-som-1.x.dtbo
+imx8mn-var-som-1.x-symphony-1.x-root-dtbs := imx8mn-var-som-symphony-root.dtb imx8mn-var-som-symphony-1.x.dtbo imx8mn-var-som-1.x.dtbo
 
-dtb-$(CONFIG_ARCH_MXC) += imx8mn-var-som-1.x-symphony.dtb \
+imx8mn-var-som-wbe-symphony-dtbs := imx8mn-var-som-symphony.dtb imx8mn-var-som-wbe.dtbo
+imx8mn-var-som-wbe-symphony-m7-dtbs := imx8mn-var-som-symphony-m7.dtb imx8mn-var-som-wbe.dtbo
+imx8mn-var-som-wbe-symphony-root-dtbs := imx8mn-var-som-symphony-root.dtb imx8mn-var-som-wbe.dtbo
+imx8mn-var-som-wbe-symphony-1.x-dtbs := imx8mn-var-som-symphony.dtb imx8mn-var-som-symphony-1.x.dtbo imx8mn-var-som-wbe.dtbo
+imx8mn-var-som-wbe-symphony-1.x-m7-dtbs := imx8mn-var-som-symphony-m7.dtb imx8mn-var-som-symphony-1.x.dtbo imx8mn-var-som-wbe.dtbo
+imx8mn-var-som-wbe-symphony-1.x-root-dtbs := imx8mn-var-som-symphony-root.dtb imx8mn-var-som-symphony-1.x.dtbo imx8mn-var-som-wbe.dtbo
+
+dtb-$(CONFIG_ARCH_MXC) += imx8mn-var-som-symphony-1.x.dtb \
+			  imx8mn-var-som-symphony-1.x-m7.dtb \
+			  imx8mn-var-som-symphony-1.x-root.dtb \
+			  imx8mn-var-som-1.x-symphony.dtb \
 			  imx8mn-var-som-1.x-symphony-m7.dtb \
 			  imx8mn-var-som-1.x-symphony-root.dtb \
 			  imx8mn-var-som-wbe-symphony.dtb \
 			  imx8mn-var-som-wbe-symphony-m7.dtb \
 			  imx8mn-var-som-wbe-symphony-root.dtb \
+			  imx8mn-var-som-1.x-symphony-1.x.dtb \
+			  imx8mn-var-som-1.x-symphony-1.x-m7.dtb \
+			  imx8mn-var-som-1.x-symphony-1.x-root.dtb \
+			  imx8mn-var-som-wbe-symphony-1.x.dtb \
+			  imx8mn-var-som-wbe-symphony-1.x-m7.dtb \
+			  imx8mn-var-som-wbe-symphony-1.x-root.dtb \
 			  imx8mn-var-som-fulfil-lfp.dtb
 
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-evk.dtb imx8mp-evk-rm67191.dtb imx8mp-evk-it6263-lvds-dual-channel.dtb \
@@ -241,6 +274,16 @@ dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-symphony-basler-isi0.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-symphony-basler-isp0-m7.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-symphony-basler-isp0.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-symphony-m7.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-smarc-echo.dtb
+
+imx8mp-var-som-symphony-1.x-dtbs := imx8mp-var-som-symphony.dtb imx8mp-var-som-symphony-1.x.dtbo
+imx8mp-var-som-symphony-1.x-2nd-ov5640-m7-dtbs := imx8mp-var-som-symphony-2nd-ov5640-m7.dtb imx8mp-var-som-symphony-1.x.dtbo
+imx8mp-var-som-symphony-1.x-2nd-ov5640-dtbs := imx8mp-var-som-symphony-2nd-ov5640.dtb imx8mp-var-som-symphony-1.x.dtbo
+imx8mp-var-som-symphony-1.x-basler-isi0-m7-dtbs := imx8mp-var-som-symphony-basler-isi0-m7.dtb imx8mp-var-som-symphony-1.x.dtbo
+imx8mp-var-som-symphony-1.x-basler-isi0-dtbs := imx8mp-var-som-symphony-basler-isi0.dtb imx8mp-var-som-symphony-1.x.dtbo
+imx8mp-var-som-symphony-1.x-basler-isp0-m7-dtbs := imx8mp-var-som-symphony-basler-isp0-m7.dtb imx8mp-var-som-symphony-1.x.dtbo
+imx8mp-var-som-symphony-1.x-basler-isp0-dtbs := imx8mp-var-som-symphony-basler-isp0.dtb imx8mp-var-som-symphony-1.x.dtbo
+imx8mp-var-som-symphony-1.x-m7-dtbs := imx8mp-var-som-symphony-m7.dtb imx8mp-var-som-symphony-1.x.dtbo
 
 imx8mp-var-som-1.x-symphony-dtbs := imx8mp-var-som-symphony.dtb imx8mp-var-som-1.x.dtbo
 imx8mp-var-som-1.x-symphony-2nd-ov5640-m7-dtbs := imx8mp-var-som-symphony-2nd-ov5640-m7.dtb imx8mp-var-som-1.x.dtbo
@@ -250,6 +293,14 @@ imx8mp-var-som-1.x-symphony-basler-isi0-dtbs := imx8mp-var-som-symphony-basler-i
 imx8mp-var-som-1.x-symphony-basler-isp0-m7-dtbs := imx8mp-var-som-symphony-basler-isp0-m7.dtb imx8mp-var-som-1.x.dtbo
 imx8mp-var-som-1.x-symphony-basler-isp0-dtbs := imx8mp-var-som-symphony-basler-isp0.dtb imx8mp-var-som-1.x.dtbo
 imx8mp-var-som-1.x-symphony-m7-dtbs := imx8mp-var-som-symphony-m7.dtb imx8mp-var-som-1.x.dtbo
+imx8mp-var-som-1.x-symphony-1.x-dtbs := imx8mp-var-som-symphony.dtb imx8mp-var-som-symphony-1.x.dtbo imx8mp-var-som-1.x.dtbo
+imx8mp-var-som-1.x-symphony-1.x-2nd-ov5640-m7-dtbs := imx8mp-var-som-symphony-2nd-ov5640-m7.dtb imx8mp-var-som-symphony-1.x.dtbo imx8mp-var-som-1.x.dtbo
+imx8mp-var-som-1.x-symphony-1.x-2nd-ov5640-dtbs := imx8mp-var-som-symphony-2nd-ov5640.dtb imx8mp-var-som-symphony-1.x.dtbo imx8mp-var-som-1.x.dtbo
+imx8mp-var-som-1.x-symphony-1.x-basler-isi0-m7-dtbs := imx8mp-var-som-symphony-basler-isi0-m7.dtb imx8mp-var-som-symphony-1.x.dtbo imx8mp-var-som-1.x.dtbo
+imx8mp-var-som-1.x-symphony-1.x-basler-isi0-dtbs := imx8mp-var-som-symphony-basler-isi0.dtb imx8mp-var-som-symphony-1.x.dtbo imx8mp-var-som-1.x.dtbo
+imx8mp-var-som-1.x-symphony-1.x-basler-isp0-m7-dtbs := imx8mp-var-som-symphony-basler-isp0-m7.dtb imx8mp-var-som-symphony-1.x.dtbo imx8mp-var-som-1.x.dtbo
+imx8mp-var-som-1.x-symphony-1.x-basler-isp0-dtbs := imx8mp-var-som-symphony-basler-isp0.dtb imx8mp-var-som-symphony-1.x.dtbo imx8mp-var-som-1.x.dtbo
+imx8mp-var-som-1.x-symphony-1.x-m7-dtbs := imx8mp-var-som-symphony-m7.dtb imx8mp-var-som-symphony-1.x.dtbo imx8mp-var-som-1.x.dtbo
 
 imx8mp-var-som-wbe-symphony-dtbs := imx8mp-var-som-symphony.dtb imx8mp-var-som-wbe.dtbo
 imx8mp-var-som-wbe-symphony-2nd-ov5640-m7-dtbs := imx8mp-var-som-symphony-2nd-ov5640-m7.dtb imx8mp-var-som-wbe.dtbo
@@ -259,6 +310,23 @@ imx8mp-var-som-wbe-symphony-basler-isi0-dtbs := imx8mp-var-som-symphony-basler-i
 imx8mp-var-som-wbe-symphony-basler-isp0-m7-dtbs := imx8mp-var-som-symphony-basler-isp0-m7.dtb imx8mp-var-som-wbe.dtbo
 imx8mp-var-som-wbe-symphony-basler-isp0-dtbs := imx8mp-var-som-symphony-basler-isp0.dtb imx8mp-var-som-wbe.dtbo
 imx8mp-var-som-wbe-symphony-m7-dtbs := imx8mp-var-som-symphony-m7.dtb imx8mp-var-som-wbe.dtbo
+imx8mp-var-som-wbe-symphony-1.x-dtbs := imx8mp-var-som-symphony.dtb imx8mp-var-som-symphony-1.x.dtbo imx8mp-var-som-wbe.dtbo
+imx8mp-var-som-wbe-symphony-1.x-2nd-ov5640-m7-dtbs := imx8mp-var-som-symphony-2nd-ov5640-m7.dtb imx8mp-var-som-symphony-1.x.dtbo imx8mp-var-som-wbe.dtbo
+imx8mp-var-som-wbe-symphony-1.x-2nd-ov5640-dtbs := imx8mp-var-som-symphony-2nd-ov5640.dtb imx8mp-var-som-symphony-1.x.dtbo imx8mp-var-som-wbe.dtbo
+imx8mp-var-som-wbe-symphony-1.x-basler-isi0-m7-dtbs := imx8mp-var-som-symphony-basler-isi0-m7.dtb imx8mp-var-som-symphony-1.x.dtbo imx8mp-var-som-wbe.dtbo
+imx8mp-var-som-wbe-symphony-1.x-basler-isi0-dtbs := imx8mp-var-som-symphony-basler-isi0.dtb imx8mp-var-som-symphony-1.x.dtbo imx8mp-var-som-wbe.dtbo
+imx8mp-var-som-wbe-symphony-1.x-basler-isp0-m7-dtbs := imx8mp-var-som-symphony-basler-isp0-m7.dtb imx8mp-var-som-symphony-1.x.dtbo imx8mp-var-som-wbe.dtbo
+imx8mp-var-som-wbe-symphony-1.x-basler-isp0-dtbs := imx8mp-var-som-symphony-basler-isp0.dtb imx8mp-var-som-symphony-1.x.dtbo imx8mp-var-som-wbe.dtbo
+imx8mp-var-som-wbe-symphony-1.x-m7-dtbs := imx8mp-var-som-symphony-m7.dtb imx8mp-var-som-symphony-1.x.dtbo imx8mp-var-som-wbe.dtbo
+
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-symphony-1.x.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-symphony-1.x-2nd-ov5640-m7.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-symphony-1.x-2nd-ov5640.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-symphony-1.x-basler-isi0-m7.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-symphony-1.x-basler-isi0.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-symphony-1.x-basler-isp0-m7.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-symphony-1.x-basler-isp0.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-symphony-1.x-m7.dtb
 
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-1.x-symphony.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-1.x-symphony-2nd-ov5640-m7.dtb
@@ -268,6 +336,14 @@ dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-1.x-symphony-basler-isi0.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-1.x-symphony-basler-isp0-m7.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-1.x-symphony-basler-isp0.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-1.x-symphony-m7.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-1.x-symphony-1.x.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-1.x-symphony-1.x-2nd-ov5640-m7.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-1.x-symphony-1.x-2nd-ov5640.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-1.x-symphony-1.x-basler-isi0-m7.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-1.x-symphony-1.x-basler-isi0.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-1.x-symphony-1.x-basler-isp0-m7.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-1.x-symphony-1.x-basler-isp0.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-1.x-symphony-1.x-m7.dtb
 
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-wbe-symphony.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-wbe-symphony-2nd-ov5640-m7.dtb
@@ -277,6 +353,14 @@ dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-wbe-symphony-basler-isi0.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-wbe-symphony-basler-isp0-m7.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-wbe-symphony-basler-isp0.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-wbe-symphony-m7.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-wbe-symphony-1.x.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-wbe-symphony-1.x-2nd-ov5640-m7.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-wbe-symphony-1.x-2nd-ov5640.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-wbe-symphony-1.x-basler-isi0-m7.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-wbe-symphony-1.x-basler-isi0.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-wbe-symphony-1.x-basler-isp0-m7.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-wbe-symphony-1.x-basler-isp0.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-som-wbe-symphony-1.x-m7.dtb
 
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-var-dart-sonata.dtb \
                           imx8mp-var-dart-sonata-basler-isi0-m7.dtb \
@@ -492,6 +576,29 @@ dtb-$(CONFIG_ARCH_MXC) += imx8qm-var-som-symphony-dp.dtb imx8qm-var-som-symphony
 			  imx8qm-var-spear-sp8customboard-dp-m4.dtb imx8qm-var-spear-sp8customboard-hdmi-m4.dtb imx8qm-var-spear-sp8customboard-lvds-m4.dtb \
 			  imx8qp-var-spear-sp8customboard-dp.dtb imx8qp-var-spear-sp8customboard-hdmi.dtb imx8qp-var-spear-sp8customboard-lvds.dtb \
 			  imx8qp-var-spear-sp8customboard-dp-m4.dtb imx8qp-var-spear-sp8customboard-hdmi-m4.dtb imx8qp-var-som-symphony-lvds-m4.dtb
+
+imx8qm-var-som-symphony-1.x-dp-dtbs := imx8qm-var-som-symphony-dp.dtb imx8qm-var-som-symphony-1.x.dtbo
+imx8qm-var-som-symphony-1.x-dp-m4-dtbs := imx8qm-var-som-symphony-dp-m4.dtb imx8qm-var-som-symphony-1.x.dtbo
+imx8qm-var-som-symphony-1.x-hdmi-dtbs := imx8qm-var-som-symphony-hdmi.dtb imx8qm-var-som-symphony-1.x.dtbo
+imx8qm-var-som-symphony-1.x-hdmi-m4-dtbs := imx8qm-var-som-symphony-hdmi-m4.dtb imx8qm-var-som-symphony-1.x.dtbo
+imx8qm-var-som-symphony-1.x-lvds-dtbs := imx8qm-var-som-symphony-lvds.dtb imx8qm-var-som-symphony-1.x.dtbo
+imx8qm-var-som-symphony-1.x-lvds-m4-dtbs := imx8qm-var-som-symphony-lvds-m4.dtb imx8qm-var-som-symphony-1.x.dtbo
+
+imx8qp-var-som-symphony-1.x-dp-dtbs := imx8qp-var-som-symphony-dp.dtb imx8qm-var-som-symphony-1.x.dtbo
+imx8qp-var-som-symphony-1.x-dp-m4-dtbs := imx8qp-var-som-symphony-dp-m4.dtb imx8qm-var-som-symphony-1.x.dtbo
+imx8qp-var-som-symphony-1.x-hdmi-dtbs := imx8qp-var-som-symphony-hdmi.dtb imx8qm-var-som-symphony-1.x.dtbo
+imx8qp-var-som-symphony-1.x-hdmi-m4-dtbs := imx8qp-var-som-symphony-hdmi-m4.dtb imx8qm-var-som-symphony-1.x.dtbo
+imx8qp-var-som-symphony-1.x-lvds-dtbs := imx8qp-var-som-symphony-lvds.dtb imx8qm-var-som-symphony-1.x.dtbo
+imx8qp-var-som-symphony-1.x-lvds-m4-dtbs := imx8qp-var-som-symphony-lvds-m4.dtb imx8qm-var-som-symphony-1.x.dtbo
+
+dtb-$(CONFIG_ARCH_MXC) += imx8qm-var-som-symphony-1.x-dp.dtb imx8qm-var-som-symphony-1.x-dp-m4.dtb \
+			  imx8qm-var-som-symphony-1.x-hdmi.dtb imx8qm-var-som-symphony-1.x-hdmi-m4.dtb \
+			  imx8qm-var-som-symphony-1.x-lvds.dtb imx8qm-var-som-symphony-1.x-lvds-m4.dtb
+
+dtb-$(CONFIG_ARCH_MXC) += imx8qp-var-som-symphony-1.x-dp.dtb imx8qp-var-som-symphony-1.x-dp-m4.dtb \
+			  imx8qp-var-som-symphony-1.x-hdmi.dtb imx8qp-var-som-symphony-1.x-hdmi-m4.dtb \
+			  imx8qp-var-som-symphony-1.x-lvds.dtb imx8qp-var-som-symphony-1.x-lvds-m4.dtb
+
 dtb-$(CONFIG_ARCH_MXC) += imx8qm-mek.dtb imx8qm-mek-ov5640.dtb \
 			  imx8qm-mek-enet2-tja1100.dtb imx8qm-mek-rpmsg.dtb \
 			  imx8qm-mek-hdmi.dtb \
@@ -626,8 +733,17 @@ dtb-$(CONFIG_ARCH_MXC) += imx8qxp-mek.dtb imx8qxp-mek-ov5640.dtb \
 			  imx8qxp-17x17-val.dtb imx8dx-lpddr4-val.dtb imx8dx-17x17-val.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8qxp-mek-dom0.dtb imx8qxp-mek-root.dtb \
 			  imx8qxp-mek-inmate.dtb
+
+imx8qxp-var-som-symphony-1.x-sd-dtbs := imx8qxp-var-som-symphony-sd.dtb imx8qxp-var-som-symphony-1.x.dtbo
+imx8qxp-var-som-symphony-1.x-wifi-dtbs := imx8qxp-var-som-symphony-wifi.dtb imx8qxp-var-som-symphony-1.x.dtbo
+imx8qxp-var-som-symphony-1.x-sd-m4-dtbs := imx8qxp-var-som-symphony-sd-m4.dtb imx8qxp-var-som-symphony-1.x.dtbo
+imx8qxp-var-som-symphony-1.x-wifi-m4-dtbs := imx8qxp-var-som-symphony-wifi-m4.dtb imx8qxp-var-som-symphony-1.x.dtbo
+
 dtb-$(CONFIG_ARCH_MXC) += imx8qxp-var-som-symphony-sd.dtb imx8qxp-var-som-symphony-wifi.dtb \
 			  imx8qxp-var-som-symphony-sd-m4.dtb imx8qxp-var-som-symphony-wifi-m4.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8qxp-var-som-symphony-1.x-sd.dtb imx8qxp-var-som-symphony-1.x-wifi.dtb \
+			  imx8qxp-var-som-symphony-1.x-sd-m4.dtb imx8qxp-var-som-symphony-1.x-wifi-m4.dtb
+
 dtb-$(CONFIG_ARCH_MXC) += imx93-14x14-evk.dtb \
 			  imx93-14x14-evk-tja1103.dtb imx93-14x14-evk-rm67199.dtb \
 			  imx93-14x14-evk-mqs.dtb imx93-14x14-evk-aud-hat.dtb \
@@ -702,14 +818,31 @@ dtb-$(CONFIG_ARCH_MXC) += imx93-9x9-qsb.dtb \
 dtb-$(CONFIG_ARCH_MXC) += imx93-tqma9352-mba93xxla.dtb
 
 dtb-$(CONFIG_ARCH_MXC) += imx93-var-som-symphony.dtb \
-			  imx93-var-som-symphony-m33.dtb \
-			  imx93-var-som-wbe-symphony.dtb
+			  imx93-var-som-symphony-m33.dtb
+
+imx93-var-som-wbe-symphony-dtbs := imx93-var-som-symphony.dtb imx93-var-som-wbe.dtbo
+dtb-$(CONFIG_ARCH_MXC) += imx93-var-som-wbe-symphony.dtb
 
 imx93-var-som-symphony-ld-dtbs := imx93-var-som-symphony.dtb imx93-var-som-ld.dtbo
 imx93-var-som-wbe-symphony-ld-dtbs := imx93-var-som-wbe-symphony.dtb imx93-var-som-ld.dtbo
 
-dtb-$(CONFIG_ARCH_MXC) += imx93-var-som-symphony-ld.dtb
-dtb-$(CONFIG_ARCH_MXC) += imx93-var-som-wbe-symphony-ld.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx93-var-som-symphony-ld.dtb \
+			  imx93-var-som-wbe-symphony-ld.dtb
+
+imx93-var-som-symphony-1.x-dtbs := imx93-var-som-symphony.dtb imx93-var-som-symphony-1.x.dtbo
+imx93-var-som-symphony-1.x-m33-dtbs := imx93-var-som-symphony-m33.dtb imx93-var-som-symphony-1.x.dtbo
+
+dtb-$(CONFIG_ARCH_MXC) += imx93-var-som-symphony-1.x.dtb \
+			  imx93-var-som-symphony-1.x-m33.dtb
+
+imx93-var-som-wbe-symphony-1.x-dtbs := imx93-var-som-symphony-1.x.dtb imx93-var-som-wbe.dtbo
+dtb-$(CONFIG_ARCH_MXC) += imx93-var-som-wbe-symphony-1.x.dtb
+
+imx93-var-som-symphony-1.x-ld-dtbs := imx93-var-som-symphony-1.x.dtb imx93-var-som-ld.dtbo
+imx93-var-som-wbe-symphony-1.x-ld-dtbs := imx93-var-som-wbe-symphony-1.x.dtb imx93-var-som-ld.dtbo
+
+dtb-$(CONFIG_ARCH_MXC) += imx93-var-som-symphony-1.x-ld.dtb \
+			  imx93-var-som-wbe-symphony-1.x-ld.dtb \
 
 dtb-$(CONFIG_ARCH_MXC) += imx93-var-dart-dt8mcustomboard.dtb \
 			  imx93-var-dart-dt8mcustomboard-m33.dtb
@@ -745,14 +878,22 @@ dtb-$(CONFIG_ARCH_MXC) += imx91-9x9-qsb-i3c.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx91-var-dart-dt8mcustomboard.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx91-var-dart-sonata.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx91-var-som-symphony.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx91-var-som-symphony-1.x.dtb
+
+imx91-var-som-wbe-symphony-1.x-dtbs := imx91-var-som-symphony-1.x.dtb imx91-var-som-wbe.dtbo
+dtb-$(CONFIG_ARCH_MXC) += imx91-var-som-wbe-symphony-1.x.dtb
 
 imx91-var-dart-dt8mcustomboard-ld-dtbs := imx91-var-dart-dt8mcustomboard.dtb imx91-var-som-ld.dtbo
 imx91-var-dart-sonata-ld-dtbs := imx91-var-dart-sonata.dtb imx91-var-som-ld.dtbo
 imx91-var-som-symphony-ld-dtbs := imx91-var-som-symphony.dtb imx91-var-som-ld.dtbo
+imx91-var-som-symphony-1.x-ld-dtbs := imx91-var-som-symphony-1.x.dtb imx91-var-som-ld.dtbo
+imx91-var-som-wbe-symphony-1.x-ld-dtbs := imx91-var-som-wbe-symphony-1.x.dtb imx91-var-som-ld.dtbo
 
 dtb-$(CONFIG_ARCH_MXC) += imx91-var-dart-dt8mcustomboard-ld.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx91-var-dart-sonata-ld.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx91-var-som-symphony-ld.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx91-var-som-symphony-1.x-ld.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx91-var-som-wbe-symphony-1.x-ld.dtb
 
 dtb-$(CONFIG_ARCH_MXC) += imx95-15x15-evk.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx95-15x15-evk-flexspi-m2.dtb

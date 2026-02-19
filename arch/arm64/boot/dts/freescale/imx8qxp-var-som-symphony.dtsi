@@ -5,6 +5,7 @@
  */
 
 #include "imx8qxp-var-som.dtsi"
+#include <dt-bindings/net/mxl-8611x.h>
 
 / {
 	aliases {
@@ -234,10 +235,20 @@
 			reg = <5>;
 			qca,disable-smarteee;
 			vddio-supply = <&vddio1>;
-			adi,phy-mode-override = "rgmii";
 			reset-gpios = <&pca9534 5 GPIO_ACTIVE_LOW>;
 			reset-assert-us = <10000>;
-			reset-deassert-us = <20000>;
+			reset-deassert-us = <100000>;
+
+			mxl-8611x,led0_cfg = <(
+				MXL8611X_LEDX_CFG_LINK_UP_RX_ACT_ON |
+				MXL8611X_LEDX_CFG_LINK_UP_TX_ACT_ON |
+				MXL8611X_LEDX_CFG_TRAFFIC_ACT_BLINK_IND
+			)>;
+			mxl-8611x,led1_cfg = <(
+				MXL8611X_LEDX_CFG_LINK_UP_10MB_ON |
+				MXL8611X_LEDX_CFG_LINK_UP_100MB_ON |
+				MXL8611X_LEDX_CFG_LINK_UP_1GB_ON
+			)>;
 
 			vddio1: vddio-regulator {
 				regulator-min-microvolt = <1800000>;
@@ -248,9 +259,13 @@
 };
 
 &fec2 {
+	/* On Symphony v1.5 and older, or if
+	 * using the Atheros AR8033 PHY, set:
+	 *	phy-mode = "rgmii-rxid";
+	 */
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_fec2>;
-	phy-mode = "rgmii-rxid";
+	phy-mode = "rgmii";
 	phy-handle = <&ethphy1>;
 	fsl,magic-packet;
 	status = "okay";
@@ -352,11 +367,12 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_captouch>;
 		interrupt-parent = <&lsio_gpio0>;
-		interrupts = <24 0>;
+		interrupts = <24 IRQ_TYPE_LEVEL_LOW>;
 		touchscreen-size-x = <800>;
 		touchscreen-size-y = <480>;
 		touchscreen-inverted-x;
 		touchscreen-inverted-y;
+		wakeup-source;
 	};
 
 	/* DS1337 RTC module */
@@ -364,6 +380,54 @@
 		status = "okay";
 		compatible = "dallas,ds1337";
 		reg = <0x68>;
+	};
+
+	/* GPIO Expander */
+	pcal6408: gpio@21 {
+		compatible = "nxp,pcal6408";
+		reg = <0x21>;
+		standard-regs-fallback;
+		gpio-controller;
+		#gpio-cells = <2>;
+		status = "okay";
+
+		/*
+		 * RGB_SEL
+		 * output-lo: Configure mux for VAR-SOMs LVDS
+		 * output-hi: Configure mux for VAR-SOM-MX91 RGB2LVDS
+		 */
+		rgb_sel {
+			gpio-hog;
+			gpios = <7 GPIO_ACTIVE_HIGH>;
+			output-low;
+			line-name = "rgb_sel";
+		};
+
+		/*
+		 * The SEC_RSTN line for the TPM2 module has an external
+		 * pull-down, keeping the module in reset by default.
+		 * Drive this signal high to release the TPM2 from reset.
+		 */
+		sec_resetn {
+			gpio-hog;
+			gpios = <4 GPIO_ACTIVE_HIGH>;
+			output-high;
+			line-name = "sec_rstn";
+		};
+	};
+
+	/* TPM */
+	st33ktpm2xi2c: st33ktpm2xi2c@2e {
+		compatible = "infineon,slb9673", "tcg,tpm-tis-i2c";
+		reg = <0x2e>;
+		/*
+		 * reset-gpios is not used by the TPM driver, but forces
+		 * probe ordering: ensures GPIO expander is initialized
+		 * and sec_rstn GPIO hog has released TPM from reset
+		 * before the TPM driver probes.
+		 */
+		reset-gpios = <&pcal6408 4 GPIO_ACTIVE_HIGH>;
+		status = "okay";
 	};
 };
 
@@ -518,12 +582,6 @@
 	pinctrl_pca9534: pca9534grp {
 		fsl,pins = <
 			IMX8QXP_MIPI_CSI0_MCLK_OUT_LSIO_GPIO3_IO04		0xC0000041
-		>;
-	};
-
-	pinctrl_pcieb: pciebgrp {
-		fsl,pins = <
-			IMX8QXP_SAI1_RXD_LSIO_GPIO0_IO29			0x60000021
 		>;
 	};
 
@@ -727,9 +785,7 @@
 };
 
 &pcieb{
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_pcieb>;
-	reset-gpio = <&lsio_gpio0 29 GPIO_ACTIVE_LOW>;
+	reset-gpio = <&pcal6408 1 GPIO_ACTIVE_LOW>;
 	status = "okay";
 };
 
