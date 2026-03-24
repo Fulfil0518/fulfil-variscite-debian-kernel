@@ -256,11 +256,5 @@ int mcp251xfd_handle_tefif(struct mcp251xfd_priv *priv)
 		netif_wake_queue(priv->ndev);
 	}
 
-	if (priv->tx_coalesce_usecs_irq)
-		hrtimer_start(&priv->tx_irq_timer,
-			      ns_to_ktime(priv->tx_coalesce_usecs_irq *
-					  NSEC_PER_USEC),
-			      HRTIMER_MODE_REL);
-
 	return 0;
 }
