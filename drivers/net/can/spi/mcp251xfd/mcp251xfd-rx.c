@@ -173,7 +173,7 @@ mcp251xfd_handle_rxif_one(struct mcp251xfd_priv *priv,
 	}
 
 	mcp251xfd_hw_rx_obj_to_skb(priv, hw_rx_obj, skb);
-	err = can_rx_offload_queue_sorted(&priv->offload, skb, hw_rx_obj->ts);
+	err = can_rx_offload_queue_timestamp(&priv->offload, skb, hw_rx_obj->ts);
 	if (err)
 		stats->rx_fifo_errors++;
 
@@ -254,13 +254,23 @@ int mcp251xfd_handle_rxif(struct mcp251xfd_priv *priv)
 	int err, n;
 
 	mcp251xfd_for_each_rx_ring(priv, ring, n) {
-		if (!(priv->regs_status.rxif & BIT(ring->fifo_nr)))
+		/* - if RX IRQ coalescing is active always handle ring 0
+		 * - only handle rings if RX IRQ is active
+		 */
+		if ((ring->nr > 0 || !priv->rx_obj_num_coalesce_irq) &&
+		    !(priv->regs_status.rxif & BIT(ring->fifo_nr)))
 			continue;
 
 		err = mcp251xfd_handle_rxif_ring(priv, ring);
 		if (err)
 			return err;
 	}
+
+	if (priv->rx_coalesce_usecs_irq)
+		hrtimer_start(&priv->rx_irq_timer,
+			      ns_to_ktime(priv->rx_coalesce_usecs_irq *
+					  NSEC_PER_USEC),
+			      HRTIMER_MODE_REL);
 
 	return 0;
 }
