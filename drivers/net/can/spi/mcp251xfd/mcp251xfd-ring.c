@@ -207,72 +207,16 @@ mcp251xfd_ring_init_rx(struct mcp251xfd_priv *priv, u16 *base, u8 *fifo_nr)
 	}
 }
 
-int mcp251xfd_ring_init(struct mcp251xfd_priv *priv)
+void mcp251xfd_ring_init(struct mcp251xfd_priv *priv)
 {
-	const struct mcp251xfd_rx_ring *rx_ring;
-	u16 base = 0, ram_used;
+	u16 base = 0;
 	u8 fifo_nr = 1;
-	int i;
 
 	netdev_reset_queue(priv->ndev);
 
 	mcp251xfd_ring_init_tef(priv, &base);
-	mcp251xfd_ring_init_rx(priv, &base, &fifo_nr);
 	mcp251xfd_ring_init_tx(priv, &base, &fifo_nr);
-
-	/* mcp251xfd_handle_rxif() will iterate over all RX rings.
-	 * Rings with their corresponding bit set in
-	 * priv->regs_status.rxif are read out.
-	 *
-	 * If the chip is configured for only 1 RX-FIFO, and if there
-	 * is an RX interrupt pending (RXIF in INT register is set),
-	 * it must be the 1st RX-FIFO.
-	 *
-	 * We mark the RXIF of the 1st FIFO as pending here, so that
-	 * we can skip the read of the RXIF register in
-	 * mcp251xfd_read_regs_status() for the 1 RX-FIFO only case.
-	 *
-	 * If we use more than 1 RX-FIFO, this value gets overwritten
-	 * in mcp251xfd_read_regs_status(), so set it unconditionally
-	 * here.
-	 */
-	priv->regs_status.rxif = BIT(priv->rx[0]->fifo_nr);
-
-	netdev_dbg(priv->ndev,
-		   "FIFO setup: TEF:         0x%03x: %2d*%zu bytes = %4zu bytes\n",
-		   mcp251xfd_get_tef_obj_addr(0),
-		   priv->tx->obj_num, sizeof(struct mcp251xfd_hw_tef_obj),
-		   priv->tx->obj_num * sizeof(struct mcp251xfd_hw_tef_obj));
-
-	mcp251xfd_for_each_rx_ring(priv, rx_ring, i) {
-		netdev_dbg(priv->ndev,
-			   "FIFO setup: RX-%u: FIFO %u/0x%03x: %2u*%u bytes = %4u bytes\n",
-			   rx_ring->nr, rx_ring->fifo_nr,
-			   mcp251xfd_get_rx_obj_addr(rx_ring, 0),
-			   rx_ring->obj_num, rx_ring->obj_size,
-			   rx_ring->obj_num * rx_ring->obj_size);
-	}
-
-	netdev_dbg(priv->ndev,
-		   "FIFO setup: TX:   FIFO %u/0x%03x: %2u*%u bytes = %4u bytes\n",
-		   priv->tx->fifo_nr,
-		   mcp251xfd_get_tx_obj_addr(priv->tx, 0),
-		   priv->tx->obj_num, priv->tx->obj_size,
-		   priv->tx->obj_num * priv->tx->obj_size);
-
-	netdev_dbg(priv->ndev,
-		   "FIFO setup: free:                             %4u bytes\n",
-		   MCP251XFD_RAM_SIZE - (base - MCP251XFD_RAM_START));
-
-	ram_used = base - MCP251XFD_RAM_START;
-	if (ram_used > MCP251XFD_RAM_SIZE) {
-		netdev_err(priv->ndev,
-			   "Error during ring configuration, using more RAM (%u bytes) than available (%u bytes).\n",
-			   ram_used, MCP251XFD_RAM_SIZE);
-		return -ENOMEM;
-	}
-
-	return 0;
+	mcp251xfd_ring_init_rx(priv, &base, &fifo_nr);
 }
 
 void mcp251xfd_ring_free(struct mcp251xfd_priv *priv)
@@ -333,6 +277,22 @@ int mcp251xfd_ring_alloc(struct mcp251xfd_priv *priv)
 		ram_free -= rx_ring->obj_num * rx_ring->obj_size;
 	}
 	priv->rx_ring_num = i;
+
+	netdev_dbg(priv->ndev,
+		   "FIFO setup: TEF: %d*%d bytes = %d bytes, TX: %d*%d bytes = %d bytes\n",
+		   tx_obj_num, tef_obj_size, tef_obj_size * tx_obj_num,
+		   tx_obj_num, tx_obj_size, tx_obj_size * tx_obj_num);
+
+	mcp251xfd_for_each_rx_ring(priv, rx_ring, i) {
+		netdev_dbg(priv->ndev,
+			   "FIFO setup: RX-%d: %d*%d bytes = %d bytes\n",
+			   i, rx_ring->obj_num, rx_ring->obj_size,
+			   rx_ring->obj_size * rx_ring->obj_num);
+	}
+
+	netdev_dbg(priv->ndev,
+		   "FIFO setup: free: %d bytes\n",
+		   ram_free);
 
 	return 0;
 }
