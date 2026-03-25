@@ -75,11 +75,11 @@ static const char *__mcp251xfd_get_model_str(enum mcp251xfd_model model)
 {
 	switch (model) {
 	case MCP251XFD_MODEL_MCP2517FD:
-		return "MCP2517FD";
+		return "MCP2517FD"; break;
 	case MCP251XFD_MODEL_MCP2518FD:
-		return "MCP2518FD";
+		return "MCP2518FD"; break;
 	case MCP251XFD_MODEL_MCP251XFD:
-		return "MCP251xFD";
+		return "MCP251xFD"; break;
 	}
 
 	return "<unknown>";
@@ -95,21 +95,21 @@ static const char *mcp251xfd_get_mode_str(const u8 mode)
 {
 	switch (mode) {
 	case MCP251XFD_REG_CON_MODE_MIXED:
-		return "Mixed (CAN FD/CAN 2.0)";
+		return "Mixed (CAN FD/CAN 2.0)"; break;
 	case MCP251XFD_REG_CON_MODE_SLEEP:
-		return "Sleep";
+		return "Sleep"; break;
 	case MCP251XFD_REG_CON_MODE_INT_LOOPBACK:
-		return "Internal Loopback";
+		return "Internal Loopback"; break;
 	case MCP251XFD_REG_CON_MODE_LISTENONLY:
-		return "Listen Only";
+		return "Listen Only"; break;
 	case MCP251XFD_REG_CON_MODE_CONFIG:
-		return "Configuration";
+		return "Configuration"; break;
 	case MCP251XFD_REG_CON_MODE_EXT_LOOPBACK:
-		return "External Loopback";
+		return "External Loopback"; break;
 	case MCP251XFD_REG_CON_MODE_CAN2_0:
-		return "CAN 2.0";
+		return "CAN 2.0"; break;
 	case MCP251XFD_REG_CON_MODE_RESTRICTED:
-		return "Restricted Operation";
+		return "Restricted Operation"; break;
 	}
 
 	return "<unknown>";
