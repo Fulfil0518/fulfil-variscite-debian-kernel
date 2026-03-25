@@ -75,11 +75,11 @@ static const char *__mcp251xfd_get_model_str(enum mcp251xfd_model model)
 {
 	switch (model) {
 	case MCP251XFD_MODEL_MCP2517FD:
-		return "MCP2517FD";
+		return "MCP2517FD"; break;
 	case MCP251XFD_MODEL_MCP2518FD:
-		return "MCP2518FD";
+		return "MCP2518FD"; break;
 	case MCP251XFD_MODEL_MCP251XFD:
-		return "MCP251xFD";
+		return "MCP251xFD"; break;
 	}
 
 	return "<unknown>";
@@ -95,21 +95,21 @@ static const char *mcp251xfd_get_mode_str(const u8 mode)
 {
 	switch (mode) {
 	case MCP251XFD_REG_CON_MODE_MIXED:
-		return "Mixed (CAN FD/CAN 2.0)";
+		return "Mixed (CAN FD/CAN 2.0)"; break;
 	case MCP251XFD_REG_CON_MODE_SLEEP:
-		return "Sleep";
+		return "Sleep"; break;
 	case MCP251XFD_REG_CON_MODE_INT_LOOPBACK:
-		return "Internal Loopback";
+		return "Internal Loopback"; break;
 	case MCP251XFD_REG_CON_MODE_LISTENONLY:
-		return "Listen Only";
+		return "Listen Only"; break;
 	case MCP251XFD_REG_CON_MODE_CONFIG:
-		return "Configuration";
+		return "Configuration"; break;
 	case MCP251XFD_REG_CON_MODE_EXT_LOOPBACK:
-		return "External Loopback";
+		return "External Loopback"; break;
 	case MCP251XFD_REG_CON_MODE_CAN2_0:
-		return "CAN 2.0";
+		return "CAN 2.0"; break;
 	case MCP251XFD_REG_CON_MODE_RESTRICTED:
-		return "Restricted Operation";
+		return "Restricted Operation"; break;
 	}
 
 	return "<unknown>";
@@ -644,7 +644,10 @@ static int mcp251xfd_chip_softreset(const struct mcp251xfd_priv *priv)
 		return 0;
 	}
 
-	return err;
+	if (err)
+		return err;
+
+	return -ETIMEDOUT;
 }
 
 static int mcp251xfd_chip_clock_init(const struct mcp251xfd_priv *priv)
@@ -1402,12 +1405,12 @@ mcp251xfd_hw_rx_obj_to_skb(const struct mcp251xfd_priv *priv,
 			cfd->flags |= CANFD_BRS;
 
 		dlc = FIELD_GET(MCP251XFD_OBJ_FLAGS_DLC, hw_rx_obj->flags);
-		cfd->len = can_fd_dlc2len(dlc);
+		cfd->len = can_dlc2len(get_canfd_dlc(dlc));
 	} else {
 		if (hw_rx_obj->flags & MCP251XFD_OBJ_FLAGS_RTR)
 			cfd->can_id |= CAN_RTR_FLAG;
 
-		cfd->len = can_cc_dlc2len(FIELD_GET(MCP251XFD_OBJ_FLAGS_DLC,
+		cfd->len = get_can_dlc(FIELD_GET(MCP251XFD_OBJ_FLAGS_DLC,
 						 hw_rx_obj->flags));
 	}
 
@@ -2241,7 +2244,7 @@ mcp251xfd_tx_obj_from_skb(const struct mcp251xfd_priv *priv,
 	 * harm, only the lower 7 bits will be transferred into the
 	 * TEF object.
 	 */
-	dlc = can_fd_len2dlc(cfd->len);
+	dlc = can_len2dlc(cfd->len);
 	flags |= FIELD_PREP(MCP251XFD_OBJ_FLAGS_SEQ_MCP2518FD_MASK, seq) |
 		FIELD_PREP(MCP251XFD_OBJ_FLAGS_DLC, dlc);
 
@@ -2270,7 +2273,7 @@ mcp251xfd_tx_obj_from_skb(const struct mcp251xfd_priv *priv,
 
 	/* Clear data at end of CAN frame */
 	offset = round_down(cfd->len, sizeof(u32));
-	len = round_up(can_fd_dlc2len(dlc), sizeof(u32)) - offset;
+	len = round_up(can_dlc2len(dlc), sizeof(u32)) - offset;
 	if (MCP251XFD_SANITIZE_CAN && len)
 		memset(hw_tx_obj->data + offset, 0x0, len);
 	memcpy(hw_tx_obj->data, cfd->data, cfd->len);
@@ -2278,7 +2281,7 @@ mcp251xfd_tx_obj_from_skb(const struct mcp251xfd_priv *priv,
 	/* Number of bytes to be written into the RAM of the controller */
 	len = sizeof(hw_tx_obj->id) + sizeof(hw_tx_obj->flags);
 	if (MCP251XFD_SANITIZE_CAN)
-		len += round_up(can_fd_dlc2len(dlc), sizeof(u32));
+		len += round_up(can_dlc2len(dlc), sizeof(u32));
 	else
 		len += round_up(cfd->len, sizeof(u32));
 
@@ -2734,10 +2737,6 @@ static int mcp251xfd_probe(struct spi_device *spi)
 	struct clk *clk;
 	u32 freq;
 	int err;
-
-	if (!spi->irq)
-		return dev_err_probe(&spi->dev, -ENXIO,
-				     "No IRQ specified (maybe node \"interrupts-extended\" in DT missing)!\n");
 
 	rx_int = devm_gpiod_get_optional(&spi->dev, "microchip,rx-int",
 					 GPIOD_IN);
