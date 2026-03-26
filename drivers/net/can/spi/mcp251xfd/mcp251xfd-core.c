@@ -420,7 +420,7 @@ static int mcp251xfd_chip_softreset_check(const struct mcp251xfd_priv *priv)
 		return err;
 
 	if (mode != MCP251XFD_REG_CON_MODE_CONFIG) {
-		netdev_info(priv->ndev,
+		netdev_err(priv->ndev,
 			    "Controller not in Config Mode after reset, but in %s Mode (%u).\n",
 			    mcp251xfd_get_mode_str(mode), mode);
 		return -ETIMEDOUT;
@@ -435,7 +435,7 @@ static int mcp251xfd_chip_softreset(const struct mcp251xfd_priv *priv)
 
 	for (i = 0; i < MCP251XFD_SOFTRESET_RETRIES_MAX; i++) {
 		if (i)
-			netdev_info(priv->ndev,
+			netdev_err(priv->ndev,
 				    "Retrying to reset controller.\n");
 
 		err = mcp251xfd_chip_softreset_do(priv);
@@ -900,12 +900,12 @@ static int mcp251xfd_handle_rxovif(struct mcp251xfd_priv *priv)
 		/* If SERRIF is active, there was a RX MAB overflow. */
 		if (priv->regs_status.intf & MCP251XFD_REG_INT_SERRIF) {
 			if (net_ratelimit())
-				netdev_dbg(priv->ndev,
+				netdev_err(priv->ndev,
 					   "RX-%d: MAB overflow detected.\n",
 					   ring->nr);
 		} else {
 			if (net_ratelimit())
-				netdev_dbg(priv->ndev,
+				netdev_err(priv->ndev,
 					   "RX-%d: FIFO overflow.\n",
 					   ring->nr);
 		}
@@ -934,7 +934,7 @@ static int mcp251xfd_handle_rxovif(struct mcp251xfd_priv *priv)
 
 static int mcp251xfd_handle_txatif(struct mcp251xfd_priv *priv)
 {
-	netdev_info(priv->ndev, "%s\n", __func__);
+	netdev_err(priv->ndev, "%s\n", __func__);
 
 	return 0;
 }
@@ -976,7 +976,7 @@ static int mcp251xfd_handle_ivmif(struct mcp251xfd_priv *priv)
 	/* RX errors */
 	if (bdiag1 & (MCP251XFD_REG_BDIAG1_DCRCERR |
 		      MCP251XFD_REG_BDIAG1_NCRCERR)) {
-		netdev_dbg(priv->ndev, "CRC error\n");
+		netdev_err(priv->ndev, "CRC error\n");
 
 		stats->rx_errors++;
 		if (cf)
@@ -984,7 +984,7 @@ static int mcp251xfd_handle_ivmif(struct mcp251xfd_priv *priv)
 	}
 	if (bdiag1 & (MCP251XFD_REG_BDIAG1_DSTUFERR |
 		      MCP251XFD_REG_BDIAG1_NSTUFERR)) {
-		netdev_dbg(priv->ndev, "Stuff error\n");
+		netdev_err(priv->ndev, "Stuff error\n");
 
 		stats->rx_errors++;
 		if (cf)
@@ -992,7 +992,7 @@ static int mcp251xfd_handle_ivmif(struct mcp251xfd_priv *priv)
 	}
 	if (bdiag1 & (MCP251XFD_REG_BDIAG1_DFORMERR |
 		      MCP251XFD_REG_BDIAG1_NFORMERR)) {
-		netdev_dbg(priv->ndev, "Format error\n");
+		netdev_err(priv->ndev, "Format error\n");
 
 		stats->rx_errors++;
 		if (cf)
@@ -1001,7 +1001,7 @@ static int mcp251xfd_handle_ivmif(struct mcp251xfd_priv *priv)
 
 	/* TX errors */
 	if (bdiag1 & MCP251XFD_REG_BDIAG1_NACKERR) {
-		netdev_dbg(priv->ndev, "NACK error\n");
+		netdev_err(priv->ndev, "NACK error\n");
 
 		stats->tx_errors++;
 		if (cf) {
@@ -1011,7 +1011,7 @@ static int mcp251xfd_handle_ivmif(struct mcp251xfd_priv *priv)
 	}
 	if (bdiag1 & (MCP251XFD_REG_BDIAG1_DBIT1ERR |
 		      MCP251XFD_REG_BDIAG1_NBIT1ERR)) {
-		netdev_dbg(priv->ndev, "Bit1 error\n");
+		netdev_err(priv->ndev, "Bit1 error\n");
 
 		stats->tx_errors++;
 		if (cf)
@@ -1019,7 +1019,7 @@ static int mcp251xfd_handle_ivmif(struct mcp251xfd_priv *priv)
 	}
 	if (bdiag1 & (MCP251XFD_REG_BDIAG1_DBIT0ERR |
 		      MCP251XFD_REG_BDIAG1_NBIT0ERR)) {
-		netdev_dbg(priv->ndev, "Bit0 error\n");
+		netdev_err(priv->ndev, "Bit0 error\n");
 
 		stats->tx_errors++;
 		if (cf)
@@ -1136,7 +1136,7 @@ mcp251xfd_handle_modif(const struct mcp251xfd_priv *priv, bool *set_normal_mode)
 		return err;
 
 	if (mode == mode_reference) {
-		netdev_dbg(priv->ndev,
+		netdev_err(priv->ndev,
 			   "Controller changed into %s Mode (%u).\n",
 			   mcp251xfd_get_mode_str(mode), mode);
 		return 0;
@@ -1155,7 +1155,7 @@ mcp251xfd_handle_modif(const struct mcp251xfd_priv *priv, bool *set_normal_mode)
 	if ((priv->devtype_data.quirks & MCP251XFD_QUIRK_MAB_NO_WARN) &&
 	    (mode == MCP251XFD_REG_CON_MODE_RESTRICTED ||
 	     mode == MCP251XFD_REG_CON_MODE_LISTENONLY))
-		netdev_dbg(priv->ndev,
+		netdev_err(priv->ndev,
 			   "Controller changed into %s Mode (%u).\n",
 			   mcp251xfd_get_mode_str(mode), mode);
 	else
@@ -1220,9 +1220,9 @@ static int mcp251xfd_handle_serrif(struct mcp251xfd_priv *priv)
 			msg = "TX MAB underflow detected.";
 
 		if (priv->devtype_data.quirks & MCP251XFD_QUIRK_MAB_NO_WARN)
-			netdev_dbg(priv->ndev, "%s\n", msg);
+			netdev_err(priv->ndev, "%s\n", msg);
 		else
-			netdev_info(priv->ndev, "%s\n", msg);
+			netdev_err(priv->ndev, "%s\n", msg);
 
 		stats->tx_aborted_errors++;
 		stats->tx_errors++;
@@ -1291,7 +1291,7 @@ mcp251xfd_handle_eccif_recover(struct mcp251xfd_priv *priv, u8 nr)
 		return -EINVAL;
 	}
 
-	netdev_info(priv->ndev,
+	netdev_err(priv->ndev,
 		    "Recovering %s ECC Error at address 0x%04x (in TX-RAM, tx_obj=%d, tx_tail=0x%08x(%d), offset=%d).\n",
 		    ecc->ecc_stat & MCP251XFD_REG_ECCSTAT_SECIF ?
 		    "Single" : "Double",
@@ -1369,7 +1369,7 @@ mcp251xfd_handle_eccif(struct mcp251xfd_priv *priv, bool set_normal_mode)
 			ecc->cnt = 1;
 		}
 
-		netdev_info(priv->ndev,
+		netdev_err(priv->ndev,
 			    "%s 0x%04x (in TX-RAM, tx_obj=%d), occurred %d time%s.\n",
 			    msg, addr, nr, ecc->cnt, ecc->cnt > 1 ? "s" : "");
 
@@ -1399,9 +1399,9 @@ static int mcp251xfd_handle_spicrcif(struct mcp251xfd_priv *priv)
 		return err;
 
 	if (crc & MCP251XFD_REG_CRC_FERRIF)
-		netdev_notice(priv->ndev, "CRC write command format error.\n");
+		netdev_err(priv->ndev, "CRC write command format error.\n");
 	else if (crc & MCP251XFD_REG_CRC_CRCERRIF)
-		netdev_notice(priv->ndev,
+		netdev_err(priv->ndev,
 			      "CRC write error detected. CRC=0x%04lx.\n",
 			      FIELD_GET(MCP251XFD_REG_CRC_MASK, crc));
 
@@ -1749,7 +1749,7 @@ static int mcp251xfd_register_chip_detect(struct mcp251xfd_priv *priv)
 
 	if (!mcp251xfd_is_251XFD(priv) &&
 	    priv->devtype_data.model != devtype_data->model) {
-		netdev_info(ndev,
+		netdev_err(ndev,
 			    "Detected %s, but firmware specifies a %s. Fixing up.\n",
 			    __mcp251xfd_get_model_str(devtype_data->model),
 			    mcp251xfd_get_model_str(priv));
@@ -1786,7 +1786,7 @@ static int mcp251xfd_register_check_rx_int(struct mcp251xfd_priv *priv)
 	if (!rx_pending)
 		return 0;
 
-	netdev_info(priv->ndev,
+	netdev_err(priv->ndev,
 		    "RX_INT active after softreset, disabling RX_INT support.\n");
 	devm_gpiod_put(&priv->spi->dev, priv->rx_int);
 	priv->rx_int = NULL;
@@ -1857,7 +1857,7 @@ mcp251xfd_register_done(const struct mcp251xfd_priv *priv)
 
 	clk_rate = clk_get_rate(priv->clk);
 
-	netdev_info(priv->ndev,
+	netdev_err(priv->ndev,
 		    "%s rev%lu.%lu (%cRX_INT %cPLL %cMAB_NO_WARN %cCRC_REG %cCRC_RX %cCRC_TX %cECC %cHD o:%lu.%02luMHz c:%u.%02uMHz m:%u.%02uMHz rs:%u.%02uMHz es:%u.%02uMHz rf:%u.%02uMHz ef:%u.%02uMHz) successfully initialized.\n",
 		    mcp251xfd_get_model_str(priv),
 		    FIELD_GET(MCP251XFD_REG_DEVID_ID_MASK, dev_id),
