@@ -1052,6 +1052,15 @@ static int mcp251xfd_handle_cerrif(struct mcp251xfd_priv *priv)
 	if (err)
 		return err;
 
+	netdev_err(priv->ndev,
+		"cerrif: trec=0x%08x old_state=%d txbo=%d txbp=%d txwarn=%d rxbp=%d rxwarn=%d\n",
+		trec, priv->can.state,
+		!!(trec & MCP251XFD_REG_TREC_TXBO),
+		!!(trec & MCP251XFD_REG_TREC_TXBP),
+		!!(trec & MCP251XFD_REG_TREC_TXWARN),
+		!!(trec & MCP251XFD_REG_TREC_RXBP),
+		!!(trec & MCP251XFD_REG_TREC_RXWARN));
+
 	if (trec & MCP251XFD_REG_TREC_TXBO)
 		tx_state = CAN_STATE_BUS_OFF;
 	else if (trec & MCP251XFD_REG_TREC_TXBP)
