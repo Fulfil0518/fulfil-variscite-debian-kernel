@@ -1039,6 +1039,8 @@ static int mcp251xfd_handle_ivmif(struct mcp251xfd_priv *priv)
 
 static int mcp251xfd_handle_cerrif(struct mcp251xfd_priv *priv)
 {
+	netdev_err(priv->ndev, "vincentdbg: calling mcp251xfd_handle_cerrif");
+
 	struct net_device_stats *stats = &priv->ndev->stats;
 	struct sk_buff *skb;
 	struct can_frame *cf = NULL;
@@ -1087,6 +1089,8 @@ static int mcp251xfd_handle_cerrif(struct mcp251xfd_priv *priv)
 			return err;
 
 		mcp251xfd_chip_stop(priv, CAN_STATE_BUS_OFF);
+		netdev_err(priv->ndev, "vincentdbg: calling mcp251xfd_handle_cerrif into can_bus_off");
+
 		can_bus_off(priv->ndev);
 	}
 
@@ -1466,6 +1470,14 @@ static irqreturn_t mcp251xfd_irq(int irq, void *dev_id)
 			FIELD_GET(MCP251XFD_REG_INT_IE_MASK,
 				  priv->regs_status.intf);
 
+		netdev_err(priv->ndev,
+			"vincentdbg mcp251xfd_irq: intf_raw=0x%08x if=0x%08x ie=0x%08x pending=0x%08x state=%d\n",
+			priv->regs_status.intf,
+			FIELD_GET(MCP251XFD_REG_INT_IF_MASK, priv->regs_status.intf),
+			FIELD_GET(MCP251XFD_REG_INT_IE_MASK, priv->regs_status.intf),
+			intf_pending,
+			priv->can.state);
+
 		if (!(intf_pending)) {
 			can_rx_offload_threaded_irq_finish(&priv->offload);
 			return handled;
@@ -1550,6 +1562,14 @@ static irqreturn_t mcp251xfd_irq(int irq, void *dev_id)
 		 */
 		if (intf_pending & MCP251XFD_REG_INT_CERRIF ||
 		    priv->can.state > CAN_STATE_ERROR_ACTIVE) {
+
+			netdev_err(priv->ndev,
+				"cerr dispatch: intf_pending=0x%08x CERRIF=%d state=%d (>ErrorActive=%d)\n",
+				intf_pending,
+				!!(intf_pending & MCP251XFD_REG_INT_CERRIF),
+				priv->can.state,
+				priv->can.state > CAN_STATE_ERROR_ACTIVE);
+
 			err = mcp251xfd_handle(priv, cerrif);
 			if (err)
 				goto out_fail;

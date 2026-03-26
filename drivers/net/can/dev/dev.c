@@ -195,6 +195,7 @@ int can_restart_now(struct net_device *dev)
  */
 void can_bus_off(struct net_device *dev)
 {
+	netdev_info(dev, "vincentdbg: calling can_bus_off");
 	struct can_priv *priv = netdev_priv(dev);
 
 	if (priv->restart_ms)
