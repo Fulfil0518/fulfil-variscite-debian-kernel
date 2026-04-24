@@ -42,8 +42,22 @@
 			no-map;
 		};
 
+		/* Reserve the 956KB gap between vdev0vring1 and rsc_table.
+		 * Without this, Linux can allocate into 0x40010000-0x400fefff. */
+		rpmsg_gap1: rpmsg_gap1@40010000 {
+			reg = <0 0x40010000 0 0xef000>;
+			no-map;
+		};
+
 		rsc_table: rsc-table@400ff000 {
 			reg = <0 0x400ff000 0 0x1000>;
+			no-map;
+		};
+
+		/* Reserve the 3MB gap between rsc_table and vdevbuffer.
+		 * Without this, Linux can allocate into 0x40100000-0x403fffff. */
+		rpmsg_gap2: rpmsg_gap2@40100000 {
+			reg = <0 0x40100000 0 0x300000>;
 			no-map;
 		};
 
