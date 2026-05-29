@@ -1,5 +1,6 @@
 /dts-v1/;
 
+#include <dt-bindings/gpio/gpio.h>
 #include "imx8mn-var-som.dtsi"
 
 / {
@@ -17,8 +18,10 @@
 			MX8MN_IOMUXC_SPDIF_RX_GPIO5_IO4  		0x114
 			MX8MN_IOMUXC_SAI2_TXD0_GPIO4_IO26		0x114
 			MX8MN_IOMUXC_SAI3_MCLK_GPIO5_IO2		0x114
+			MX8MN_IOMUXC_SAI3_RXC_GPIO4_IO29		0x114
 		>;
 	};
+
 	pinctrl_uart1: uart1grp {
 		fsl,pins = <
 			MX8MN_IOMUXC_UART1_RXD_UART1_DCE_RX		0x140
@@ -40,6 +43,15 @@
 		>;
 	};
 
+};
+
+&gpio4 {
+	can_xceiver_off_hog {
+		gpio-hog;
+		gpios = <29 GPIO_ACTIVE_HIGH>;
+		output-low;
+		line-name = "can-xceiver-off";
+	};
 };
 
 &ecspi1 {
@@ -69,7 +81,7 @@
 /* UART for RS232 communication to auxiliary induction shuttle
 Normally used by SOM Blutetooth which must first be disabled */
 &uart2 {
-	status = "okay";
+	status = "disabled";
 };
 
 /* RS232 to odd shuttle */
