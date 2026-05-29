@@ -1,6 +1,5 @@
 /dts-v1/;
 
-#include <dt-bindings/gpio/gpio.h>
 #include "imx8mn-var-som.dtsi"
 
 / {
@@ -43,15 +42,6 @@
 		>;
 	};
 
-};
-
-&gpio4 {
-	can_xceiver_off_hog {
-		gpio-hog;
-		gpios = <29 GPIO_ACTIVE_HIGH>;
-		output-low;
-		line-name = "can-xceiver-off";
-	};
 };
 
 &ecspi1 {
