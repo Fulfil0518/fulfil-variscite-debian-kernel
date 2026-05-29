@@ -81,7 +81,7 @@
 /* UART for RS232 communication to auxiliary induction shuttle
 Normally used by SOM Blutetooth which must first be disabled */
 &uart2 {
-	status = "disabled";
+	status = "okay";
 };
 
 /* RS232 to odd shuttle */
