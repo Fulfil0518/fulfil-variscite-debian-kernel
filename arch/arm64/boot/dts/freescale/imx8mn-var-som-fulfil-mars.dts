@@ -1,5 +1,6 @@
 /dts-v1/;
 
+#include <dt-bindings/gpio/gpio.h>
 #include "imx8mn-var-som.dtsi"
 
 / {
@@ -17,8 +18,10 @@
 			MX8MN_IOMUXC_SPDIF_RX_GPIO5_IO4  		0x114
 			MX8MN_IOMUXC_SAI2_TXD0_GPIO4_IO26		0x114
 			MX8MN_IOMUXC_SAI3_MCLK_GPIO5_IO2		0x114
+			MX8MN_IOMUXC_SAI3_RXC_GPIO4_IO29		0x114
 		>;
 	};
+
 	pinctrl_uart1: uart1grp {
 		fsl,pins = <
 			MX8MN_IOMUXC_UART1_RXD_UART1_DCE_RX		0x140
@@ -40,6 +43,34 @@
 		>;
 	};
 
+};
+
+/*
+	This configuration allows kernel v6.6 to work on 4.2 gantry carrier boards.
+
+	On 4.2 gantry carrier boards, there GPIO4 IO29 (or pin 50) connects to the CAN transceiver
+	standby. When this pin is flipped high, the CAN transceiver is disabled. On v6.6 kernels,
+	this signal is driven high possibly due to reuse of Bluetooth or UART2 CTS. This causes
+	gantries to CAN disconnect immediately.
+
+	On 4.3 gantry carrier boards, this pin on the SOM is not connected to the CAN transceiver,
+	so it's unaffected.
+
+	The intent of this block is to never allow the CAN transceiver to be turned off via this standby
+	signal. This will hog the GPIO line and drive it low, so that the standby line is perpetually "off".
+
+	It's not entirely clear why v5.4 kernel does not do this. One possible explanation is that 
+	MX8MN_IOMUXC_SAI3_RXC_UART2_DCE_CTS_B 0x140 (from imx8mn-var-som.dtsi)
+	is a shared pin with GPIO4 IO29 and will bias high when nothing is happening, causing the signal
+	to turn off the CAN transceiver.
+*/
+&gpio4 {
+	can_transceiver_standby_off_hog {
+		gpio-hog;
+		gpios = <29 GPIO_ACTIVE_HIGH>;
+		output-low;
+		line-name = "can_transceiver_standby_off";
+	};
 };
 
 &ecspi1 {
