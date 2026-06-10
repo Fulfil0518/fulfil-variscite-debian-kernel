@@ -214,7 +214,8 @@ dtb-$(CONFIG_ARCH_MXC) += imx8mn-var-som-symphony-1.x.dtb \
 			  imx8mn-var-som-wbe-symphony-1.x.dtb \
 			  imx8mn-var-som-wbe-symphony-1.x-m7.dtb \
 			  imx8mn-var-som-wbe-symphony-1.x-root.dtb \
-			  imx8mn-var-som-fulfil-lfp.dtb
+			  imx8mn-var-som-fulfil-lfp.dtb \
+			  imx8mn-var-som-fulfil-mars.dtb
 
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-evk.dtb imx8mp-evk-rm67191.dtb imx8mp-evk-it6263-lvds-dual-channel.dtb \
 			  imx8mp-evk-pcie-ep.dtb  imx8mp-evk-rpmsg.dtb imx8mp-evk-ecspi-slave.dtb \
