@@ -118,3 +118,14 @@ Normally used by SOM Blutetooth which must first be disabled */
 	/delete-property/ dmas;
 	/delete-property/ dma-names;
 };
+
+&usbotg1 {
+	dr_mode = "host";
+	picophy,pre-emp-curr-control = <3>;
+	picophy,dc-vol-level-adjust = <7>;
+	hnp-disable;
+	srp-disable;
+	adp-disable;
+	extcon = <0>;
+	status = "okay";
+};
